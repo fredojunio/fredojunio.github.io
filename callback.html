@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Connected</title>
+    <style>
+      body { font: 16px/1.6 -apple-system, system-ui, sans-serif; margin: 4rem auto; max-width: 40rem; padding: 0 1.5rem; color: #2E1F17; background: #F7F0E1; }
+      #code { display: block; margin-top: 1rem; padding: .75rem; background: #fff; border: 1px solid #2E1F1733; border-radius: 6px; font-family: ui-monospace, monospace; word-break: break-all; }
+      .muted { color: #2E1F1799; font-size: .9rem; }
+    </style>
+  </head>
+  <body>
+    <h1 id="title">Connected</h1>
+    <p class="muted">Copy the code below and paste it into the terminal. It expires quickly.</p>
+    <code id="code"></code>
+    <script>
+      const p = new URLSearchParams(location.search);
+      const code = p.get('code');
+      const err = p.get('error_description') || p.get('error');
+      const out = document.getElementById('code');
+      if (code) { out.textContent = code; }
+      else if (err) { document.getElementById('title').textContent = 'Authorization failed'; out.textContent = err; }
+      else { out.textContent = 'No code in the URL.'; }
+    </script>
+  </body>
+</html>
